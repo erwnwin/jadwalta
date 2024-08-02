@@ -140,33 +140,73 @@ class Penjadwalan extends CI_Controller
     }
 
     //create jadwal
+    // public function create_jadwal()
+    // {
+    //     $jadwal = $this->m_jadwal->getAllData();
+    //     $kelas = $this->m_kelas->getAllData();
+    //     $jadwalKhusus = $this->m_khusus->getAllData();
+    //     // $tahunAKademik = $this->m_ta->aktif();
+
+    //     echo '<table>';
+    //     foreach ($kelas as $rowKelas) {
+    //         $kosong = 0;
+    //         echo '<tr>';
+    //         echo '<td>';
+    //         echo "jadwal kelas" . $rowKelas->kelas . $rowKelas->urutan_kelas . "<br>";
+    //         echo '</td>';
+    //         echo '</tr>';
+    //         echo '<tr>';
+    //         echo '<td colspan = "6">';
+    //         echo 'Mapel : ';
+    //         echo '</td>';
+    //         echo '</tr>';
+    //         echo '<tr>';
+    //         foreach ($jadwal as $rowJadwal) {
+    //             echo '<td>';
+    //             echo "===================<br>";
+    //             echo $rowJadwal->hari;
+    //             echo "<br>";
+    //             echo "=================== <br>";
+    //             $jam_mulai = strtotime($rowJadwal->jam_mulai);
+    //             for ($i = 0; $i < $rowJadwal->jumlah_sesi; $i++) {
+    //                 if (is_array($khusus = $this->searchJadwalKhusus($jadwalKhusus, $i, $rowJadwal->hari, $rowKelas->kelas))) {
+    //                     $idJadwal = $khusus['id_jadwal'];
+    //                     $keterangan = $khusus['keterangan'];
+    //                     $lama_sesi = $khusus['durasi'];
+    //                 } else {
+    //                     $idJadwal = '-';
+    //                     $keterangan = "kosong";
+    //                     $lama_sesi = $rowJadwal->lama_sesi;
+    //                     $kosong++;
+    //                 }
+    //                 $jam_selesai = date("H:i", strtotime('+' . $lama_sesi . ' minutes', $jam_mulai));
+    //                 $this->m_jadwal->insertData($rowJadwal->hari, $rowKelas->id_kelas, $i, $idJadwal, $keterangan, date("H:i", $jam_mulai), $jam_selesai);
+    //                 echo $i . " " . $idJadwal . " " . $keterangan . " " . date("H:i", $jam_mulai) . "-" . $jam_selesai . "<br>";
+    //                 $jam_mulai = strtotime($jam_selesai);
+    //             }
+    //             echo '</td>';
+    //         }
+    //         echo '</tr>';
+    //         echo '<tr>';
+    //         echo '<td>';
+    //         echo 'jumlah jadwal kosong : ' . $kosong;
+    //         echo '</td>';
+    //         echo '</tr>';
+    //     }
+    //     echo '</table>';
+    //     redirect(base_url('penjadwalan'));
+    // }
+
     public function create_jadwal()
     {
+        // Ambil data yang diperlukan
         $jadwal = $this->m_jadwal->getAllData();
         $kelas = $this->m_kelas->getAllData();
         $jadwalKhusus = $this->m_khusus->getAllData();
-        // $tahunAKademik = $this->m_ta->aktif();
 
-        echo '<table>';
         foreach ($kelas as $rowKelas) {
             $kosong = 0;
-            echo '<tr>';
-            echo '<td>';
-            echo "jadwal kelas" . $rowKelas->kelas . $rowKelas->urutan_kelas . "<br>";
-            echo '</td>';
-            echo '</tr>';
-            echo '<tr>';
-            echo '<td colspan = "6">';
-            echo 'Mapel : ';
-            echo '</td>';
-            echo '</tr>';
-            echo '<tr>';
             foreach ($jadwal as $rowJadwal) {
-                echo '<td>';
-                echo "===================<br>";
-                echo $rowJadwal->hari;
-                echo "<br>";
-                echo "=================== <br>";
                 $jam_mulai = strtotime($rowJadwal->jam_mulai);
                 for ($i = 0; $i < $rowJadwal->jumlah_sesi; $i++) {
                     if (is_array($khusus = $this->searchJadwalKhusus($jadwalKhusus, $i, $rowJadwal->hari, $rowKelas->kelas))) {
@@ -180,22 +220,24 @@ class Penjadwalan extends CI_Controller
                         $kosong++;
                     }
                     $jam_selesai = date("H:i", strtotime('+' . $lama_sesi . ' minutes', $jam_mulai));
-                    $this->m_jadwal->insertData($rowJadwal->hari, $rowKelas->id_kelas, $i, $idJadwal, $keterangan, date("H:i", $jam_mulai), $jam_selesai);
-                    echo $i . " " . $idJadwal . " " . $keterangan . " " . date("H:i", $jam_mulai) . "-" . $jam_selesai . "<br>";
+                    $this->m_jadwal->insertData(
+                        $rowJadwal->hari,
+                        $rowKelas->id_kelas,
+                        $i,
+                        $idJadwal,
+                        $keterangan,
+                        date("H:i", $jam_mulai),
+                        $jam_selesai
+                    );
                     $jam_mulai = strtotime($jam_selesai);
                 }
-                echo '</td>';
             }
-            echo '</tr>';
-            echo '<tr>';
-            echo '<td>';
-            echo 'jumlah jadwal kosong : ' . $kosong;
-            echo '</td>';
-            echo '</tr>';
         }
-        echo '</table>';
+
+        // Setelah selesai, redirect ke halaman penjadwalan
         redirect(base_url('penjadwalan'));
     }
+
 
     public function rumusan()
     {
