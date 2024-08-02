@@ -29,12 +29,21 @@
                          </div>
                          <div id="infoSiJadwalTa" class="panel-collapse collapse">
                              <div class="box-body">
+                                 <b><i class="fa fa-archive"></i> Versi 1.4</b>
+                                 <p style="text-align: justify;">
+                                 <ul>
+                                     <li>Perbaikan fitur BOT WhatsApp</li>
+                                     <!-- <li>Menambahkan fitur request jadwal</li>
+                                     <li>Integrasi BOT WhatsApp</li> -->
+                                 </ul>
+                                 </p>
+                                 <hr style="border-top: 1px solid #FFE4E1;">
                                  <b><i class="fa fa-archive"></i> Versi 1.3</b>
                                  <p style="text-align: justify;">
                                  <ul>
-                                     <li>Menambahkan fitur notifikasi melalu SMS ke nomor seluler aktif guru</li>
-                                     <li>SMS diperuntukkan jika ada guru tidak memilik kuota internet untuk mendapatkan notifikasi BOT WhatsApp</li>
-                                     <li class="text-danger">ICT terus mengatasi error yang terjadi. Terima kasih!!</li>
+                                     <li>Menambahkan fitur notifikasi melalui WA aktif guru</li>
+                                     <!-- <li>SMS diperuntukkan jika ada guru tidak memilik kuota internet untuk mendapatkan notifikasi BOT WhatsApp</li> -->
+                                     <!-- <li class="text-danger">ICT terus mengatasi error yang terjadi. Terima kasih!!</li> -->
                                      <!-- <li>Menambahkan fitur request jadwal</li>
                                      <li>Integrasi BOT WhatsApp</li> -->
                                  </ul>
@@ -158,7 +167,7 @@
                          <div class="box-header with-border">
                              <h4 class="box-title">
                                  <a data-toggle="collapse" data-parent="#accordion" href="#infoBot">
-                                     BOT WhatsApp dan BOT Telegram
+                                     BOT WhatsApp
                                  </a>
                              </h4>
                          </div>
@@ -207,26 +216,6 @@
                                  </div>
                                  <!-- /.widget-user -->
 
-                                 <div class="box box-widget widget-user-2">
-                                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                                     <div class="widget-user-header bg-primary">
-                                         <div class="widget-user-image">
-                                             <img class="img-circle" src="<?= base_url() ?>assets/img/tele.png" alt="User Avatar">
-                                         </div>
-                                         <!-- /.widget-user-image -->
-                                         <h3 class="widget-user-username">BOT Telegram</h3>
-                                         <h5 class="widget-user-desc">Cara Menggunakan BOT Telegram</h5>
-                                     </div>
-                                     <div class="box-footer no-padding">
-                                         <p class="text-center mt-2"> # SEGERA RILIS #</p>
-                                         <!-- <ul class="nav nav-stacked">
-                                             <li><a>Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                                             <li><a>Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                                             <li><a>Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                                             <li><a>Followers <span class="pull-right badge bg-red">842</span></a></li>
-                                         </ul> -->
-                                     </div>
-                                 </div>
                              </div>
                          </div>
                      </div>

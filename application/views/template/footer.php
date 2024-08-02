@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Versi</b> 1.3
+        <b>Versi</b> 1.4
     </div>
     <strong>Copyright &copy; 2024 | Made with <i class="fa fa-heart"></i> by <a href="#">TIM ICT.</a></strong>
 </footer>

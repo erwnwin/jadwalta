@@ -24,6 +24,9 @@ class Users extends CI_Controller
         FROM penjadwalan INNER JOIN guru ON guru.id_guru = penjadwalan.id_guru 
         WHERE guru.telp_wa='$telp_wa'")->result();
 
+        $this->load->model('m_login');
+        $data['users'] = $this->m_login->tampil_users();
+
         $this->load->view('template/head', $data);
         $this->load->view('template/header', $data);
         $this->load->view('template/sidebar', $data);

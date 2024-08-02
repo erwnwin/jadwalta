@@ -15,6 +15,16 @@ class M_login extends CI_Model
         $query = $this->db->query("SELECT * FROM guru WHERE alamat_email='$username' AND password='$password' LIMIT 1 ");
         return $query;
     }
+
+    public function tampil_users()
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->order_by('users.id_user', 'ASC');
+
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
 
 /* End of file M_login.php */
