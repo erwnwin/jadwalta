@@ -55,7 +55,7 @@ class Guru extends CI_Controller
 
         $this->db->insert('guru', $data);
 
-        $token = "r5-2#s!RR_b6umzdW4pm";
+        $token = "R1bqBzS9scy-5+uYzRHq";
         $target = '62' . $telp_wa;
 
         // $token = "r5-2#s!RR_b6umzdW4pm";
