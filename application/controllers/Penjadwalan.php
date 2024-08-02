@@ -238,7 +238,6 @@ class Penjadwalan extends CI_Controller
         redirect(base_url('penjadwalan'));
     }
 
-
     public function rumusan()
     {
         $result = $this->m_guru->getDataGuruJoinRequest();
@@ -272,15 +271,57 @@ class Penjadwalan extends CI_Controller
             $result[$key]->rumusan = $rumusan;
         }
 
-        echo "<pre>";
-        echo print_r($result);
-        echo "</pre>";
-        /* 
-		!create data 
-		*/
+        // Simpan data hasil rumusan ke database
         $this->m_rumusan->createData($result);
+
+        // Redirect ke halaman penjadwalan setelah data disimpan
         redirect(base_url('penjadwalan'));
     }
+
+
+
+    // public function rumusan()
+    // {
+    //     $result = $this->m_guru->getDataGuruJoinRequest();
+
+    //     foreach ($result as $key => $value) {
+    //         if (!$value->id_request) {
+    //             // tambah data bila ada guru yang tidak request
+    //             $value->hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum`at', 'Sabtu'];
+    //             $status = 0;
+    //             $result[$key]->status_request = $status;
+    //         } else {
+    //             // convert data string to array
+    //             $value->hari = explode(",", $value->hari);
+    //             $status = 1;
+    //             $result[$key]->status_request = $status;
+    //         }
+    //         // menambahkan kelas yang diajar
+    //         $result[$key]->kelas = $this->m_guru->getDataGuruJoinKelas($value->id_guru);
+    //         $kelas = $result[$key]->kelas;
+    //         // menambahkan beban kerja guru
+    //         $result[$key]->beban_kerja = $this->m_guru->getDataBebanKerja($value->id_guru);
+    //         // menambahkan total jam tersedia
+    //         $result[$key]->jam_tersedia = $this->m_guru->ketersediaanJam($kelas, $value->hari);
+    //         // menambahkan hasil rumusan 
+    //         if ($result[$key]->beban_kerja == 0 && $result[$key]->jam_tersedia == 0) {
+    //             $rumusan = 0;
+    //         } else {
+    //             $rumusan = round(($status == 1) ? 1 + ($result[$key]->beban_kerja / $result[$key]->jam_tersedia) : 0 + ($result[$key]->beban_kerja / $result[$key]->jam_tersedia), 2);
+    //         }
+
+    //         $result[$key]->rumusan = $rumusan;
+    //     }
+
+    //     echo "<pre>";
+    //     echo print_r($result);
+    //     echo "</pre>";
+    //     /* 
+    // 	!create data 
+    // 	*/
+    //     $this->m_rumusan->createData($result);
+    //     redirect(base_url('penjadwalan'));
+    // }
 
     public function reset_penjadwalan()
     {
@@ -302,83 +343,142 @@ class Penjadwalan extends CI_Controller
     }
 
 
-    // ploting
     public function ploting_jadwal()
     {
+        ob_start(); // Mulai buffering output
+
         $dataKelas = $this->m_kelas->getAllData();
         // data kelas 
         foreach ($dataKelas as $valuedataKelas) {
             $metode = 1;
             $kelas = $valuedataKelas->id_kelas;
-            echo "<hr>";
-            echo $kelas;
-            // ambil data guru dan tugas mengajarnya berdasarkan id kelas 
+
+            // Ambil data guru dan tugas mengajarnya berdasarkan id kelas 
             $dataGuru = $this->dataGuru($kelas);
-            // echo "<pre>";
-            // print_r($dataGuru);
-            // echo "</pre>";
+
             foreach ($dataGuru as $valueDataGuru) {
-                echo '<br>';
                 $id_guru = $valueDataGuru->id_guru;
                 $request = $valueDataGuru->hari_request;
-                echo "$id_guru";
-                echo $valueDataGuru->hari_request . '<br>';
-                echo 'mengajar : <br>';
-                // echo '<pre>';
-                // print_r($valueDataGuru->mengajar);
-                // echo '</pre>';
+
                 foreach ($valueDataGuru->mengajar as $valueMengajar) {
-                    echo "<br>-> $valueMengajar->nama_mapel kel. : $valueMengajar->kelompok_mapel beban : $valueMengajar->beban_jam , ";
                     // *pencarian waktu terbaik
                     $this->cariWaktuTerbaik($kelas, $id_guru, $request, $valueMengajar->beban_jam, $valueMengajar->kelompok_mapel, $metode, $valueMengajar->id_mapel, $valueMengajar->nama_mapel, $valueMengajar->id_tugas);
                 }
-                echo '<br>';
-                // 	break;
             }
-            // break;
-            echo "<hr>";
-            echo "ploting ulang perulangan";
-            echo "<hr>";
+
             $kelasKosong = $this->m_jadwal->getJadwalKosong($kelas);
             if (count($kelasKosong) > 0) {
                 $tugasGuruBelumterplot = [];
                 $guru = $this->dataGuru($kelas);
+
                 foreach (array_column($guru, 'mengajar') as $key => $value) {
                     if (!empty($value)) {
                         $tugasGuruBelumterplot[] = $guru[$key];
                     }
                 }
+
                 foreach ($tugasGuruBelumterplot as $valueDataGuruBelumTerplot) {
-                    echo '<br>';
                     $id_guru = $valueDataGuruBelumTerplot->id_guru;
                     $request = $valueDataGuruBelumTerplot->hari_request;
-                    echo $id_guru . '<br>';
-                    echo $valueDataGuruBelumTerplot->hari_request . '<br>';
-                    echo 'mengajar : <br>';
-                    print_r($valueDataGuruBelumTerplot->mengajar);
-                    echo '<br>';
+
                     foreach ($valueDataGuruBelumTerplot->mengajar as $valueMengajar) {
-                        echo "<br>-> $valueMengajar->nama_mapel kel. : $valueMengajar->kelompok_mapel sisa beban jam  : $valueMengajar->sisa_jam , ";
-                        // echo "<br>-> $valueMengajar->nama_mapel kel. : $valueMengajar->kelompok_mapel sisa beban jam  : $valueMengajar->beban_jam , ";
                         // *pencarian waktu terbaik
-                        // $this->cariWaktuTerbaik($kelas, $id_guru, $request, $valueMengajar->beban_jam, $valueMengajar->kelompok_mapel, $metode++, $valueMengajar->id_mapel, $valueMengajar->nama_mapel, $valueMengajar->id_tugas);
                         $this->cariWaktuTerbaik($kelas, $id_guru, $request, $valueMengajar->sisa_jam, $valueMengajar->kelompok_mapel, $metode++, $valueMengajar->id_mapel, $valueMengajar->nama_mapel, $valueMengajar->id_tugas);
                     }
-                    echo '<br>';
                 }
 
                 $kelasKosong = $this->m_jadwal->getJadwalKosong($kelas);
                 if (count($kelasKosong) > 0) {
-                    echo '<br>';
-                    echo '=============================';
-                    echo "JADWAL STUCK";
-                    echo '=============================';
-                    echo '<br>';
+                    // Tambahkan log atau pesan jika diperlukan
                 }
             }
         }
+
+        ob_end_clean(); // Bersihkan dan matikan buffering output
+
+        // Redirect setelah semua pemrosesan selesai
         redirect(base_url('penjadwalan'));
     }
+
+
+
+    // ploting
+    // public function ploting_jadwal()
+    // {
+    //     $dataKelas = $this->m_kelas->getAllData();
+    //     // data kelas 
+    //     foreach ($dataKelas as $valuedataKelas) {
+    //         $metode = 1;
+    //         $kelas = $valuedataKelas->id_kelas;
+    //         echo "<hr>";
+    //         echo $kelas;
+    //         // ambil data guru dan tugas mengajarnya berdasarkan id kelas 
+    //         $dataGuru = $this->dataGuru($kelas);
+    //         // echo "<pre>";
+    //         // print_r($dataGuru);
+    //         // echo "</pre>";
+    //         foreach ($dataGuru as $valueDataGuru) {
+    //             echo '<br>';
+    //             $id_guru = $valueDataGuru->id_guru;
+    //             $request = $valueDataGuru->hari_request;
+    //             echo "$id_guru";
+    //             echo $valueDataGuru->hari_request . '<br>';
+    //             echo 'mengajar : <br>';
+    //             // echo '<pre>';
+    //             // print_r($valueDataGuru->mengajar);
+    //             // echo '</pre>';
+    //             foreach ($valueDataGuru->mengajar as $valueMengajar) {
+    //                 echo "<br>-> $valueMengajar->nama_mapel kel. : $valueMengajar->kelompok_mapel beban : $valueMengajar->beban_jam , ";
+    //                 // *pencarian waktu terbaik
+    //                 $this->cariWaktuTerbaik($kelas, $id_guru, $request, $valueMengajar->beban_jam, $valueMengajar->kelompok_mapel, $metode, $valueMengajar->id_mapel, $valueMengajar->nama_mapel, $valueMengajar->id_tugas);
+    //             }
+    //             echo '<br>';
+    //             // 	break;
+    //         }
+    //         // break;
+    //         echo "<hr>";
+    //         echo "ploting ulang perulangan";
+    //         echo "<hr>";
+    //         $kelasKosong = $this->m_jadwal->getJadwalKosong($kelas);
+    //         if (count($kelasKosong) > 0) {
+    //             $tugasGuruBelumterplot = [];
+    //             $guru = $this->dataGuru($kelas);
+    //             foreach (array_column($guru, 'mengajar') as $key => $value) {
+    //                 if (!empty($value)) {
+    //                     $tugasGuruBelumterplot[] = $guru[$key];
+    //                 }
+    //             }
+    //             foreach ($tugasGuruBelumterplot as $valueDataGuruBelumTerplot) {
+    //                 echo '<br>';
+    //                 $id_guru = $valueDataGuruBelumTerplot->id_guru;
+    //                 $request = $valueDataGuruBelumTerplot->hari_request;
+    //                 echo $id_guru . '<br>';
+    //                 echo $valueDataGuruBelumTerplot->hari_request . '<br>';
+    //                 echo 'mengajar : <br>';
+    //                 print_r($valueDataGuruBelumTerplot->mengajar);
+    //                 echo '<br>';
+    //                 foreach ($valueDataGuruBelumTerplot->mengajar as $valueMengajar) {
+    //                     echo "<br>-> $valueMengajar->nama_mapel kel. : $valueMengajar->kelompok_mapel sisa beban jam  : $valueMengajar->sisa_jam , ";
+    //                     // echo "<br>-> $valueMengajar->nama_mapel kel. : $valueMengajar->kelompok_mapel sisa beban jam  : $valueMengajar->beban_jam , ";
+    //                     // *pencarian waktu terbaik
+    //                     // $this->cariWaktuTerbaik($kelas, $id_guru, $request, $valueMengajar->beban_jam, $valueMengajar->kelompok_mapel, $metode++, $valueMengajar->id_mapel, $valueMengajar->nama_mapel, $valueMengajar->id_tugas);
+    //                     $this->cariWaktuTerbaik($kelas, $id_guru, $request, $valueMengajar->sisa_jam, $valueMengajar->kelompok_mapel, $metode++, $valueMengajar->id_mapel, $valueMengajar->nama_mapel, $valueMengajar->id_tugas);
+    //                 }
+    //                 echo '<br>';
+    //             }
+
+    //             $kelasKosong = $this->m_jadwal->getJadwalKosong($kelas);
+    //             if (count($kelasKosong) > 0) {
+    //                 echo '<br>';
+    //                 echo '=============================';
+    //                 echo "JADWAL STUCK";
+    //                 echo '=============================';
+    //                 echo '<br>';
+    //             }
+    //         }
+    //     }
+    //     redirect(base_url('penjadwalan'));
+    // }
 
     /* 
 	* ambil data guru yang mengajar di kelas beserta kewajiban mengajarnya
