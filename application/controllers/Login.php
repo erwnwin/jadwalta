@@ -18,19 +18,23 @@ class Login extends CI_Controller
         $data['title'] = "Login : SiJadwalTa";
 
 
-        $this->load->view('login/index', $data);
+        $this->load->view('login/login_new', $data);
     }
 
     public function proses_login()
     {
         $username = $this->input->post('username');
-        // $alamat_email = $this->input->post('username');
         $password = $this->input->post('password');
 
+        // Cek pengguna sebagai user
         $cek_user = $this->m_login->auth_user($username, $password);
+
         if ($cek_user->num_rows() > 0) {
             $data = $cek_user->row_array();
+            $response = array();
+
             if ($data['hak_akses'] == '1') {
+                // Set session untuk user dengan hak akses 1
                 $this->session->set_userdata('masuk', TRUE);
                 $this->session->set_userdata('hak_akses', '1');
                 $this->session->set_userdata('username', $data['username']);
@@ -43,9 +47,13 @@ class Login extends CI_Controller
                 $this->session->set_userdata('foto_pengguna', $data['foto_pengguna']);
                 $this->session->set_userdata('foto_profil', $data['foto_profil']);
                 $this->session->set_userdata('id_user', $data['id_user']);
-                redirect(base_url('dashboard'));
+                $response = array(
+                    'status' => 'success',
+                    'message' => 'Sukses!<br>Login successful',
+                    'redirect' => base_url('dashboard')
+                );
             } elseif ($data['hak_akses'] == '2') {
-                $data = $cek_user->row_array();
+                // Set session untuk user dengan hak akses 2
                 $this->session->set_userdata('masuk', TRUE);
                 $this->session->set_userdata('hak_akses', '2');
                 $this->session->set_userdata('username', $data['username']);
@@ -58,9 +66,14 @@ class Login extends CI_Controller
                 $this->session->set_userdata('foto_pengguna', $data['foto_pengguna']);
                 $this->session->set_userdata('foto_profil', $data['foto_profil']);
                 $this->session->set_userdata('id_user', $data['id_user']);
-                redirect(base_url('dashboard'));
+                $response = array(
+                    'status' => 'success',
+                    'message' => 'Sukses!<br>Login successful',
+                    'redirect' => base_url('dashboard')
+                );
             }
         } else {
+            // Cek pengguna sebagai guru
             $cek_user = $this->m_login->auth_guru($username, $password);
             if ($cek_user->num_rows() > 0) {
                 $data = $cek_user->row_array();
@@ -73,13 +86,22 @@ class Login extends CI_Controller
                 $this->session->set_userdata('alamat', $data['alamat']);
                 $this->session->set_userdata('jenis_kelamin', $data['jenis_kelamin']);
                 $this->session->set_userdata('telp_wa', $data['telp_wa']);
-                redirect(base_url('dashboard'));
+                $response = array(
+                    'status' => 'success',
+                    'message' => 'Sukses!<br>Login successful',
+                    'redirect' => base_url('dashboard')
+                );
+            } else {
+                // Jika login gagal
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Upps!<br>Username or password incorrect'
+                );
             }
-            $this->session->set_flashdata('gagal', 'Username atau password tidak sesuai.');
-            redirect(base_url('login'));
         }
-        $this->session->set_flashdata('gagal', 'Username atau password tidak sesuai.');
-        redirect(base_url('login'));
+
+        // Kirim respons JSON
+        echo json_encode($response);
     }
 }
 

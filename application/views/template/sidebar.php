@@ -133,7 +133,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="<?= $this->uri->segment(1) == 'jam' ? 'active' : '' ?>"><a href="<?= base_url('jam') ?>"> Jam</a></li>
-                        <li class="<?= $this->uri->segment(1) == 'hari' ? 'active' : '' ?>"><a href="<?= base_url('hari') ?>"> Hari</a></li>
+                        <!-- <li class="<?= $this->uri->segment(1) == 'hari' ? 'active' : '' ?>"><a href="<?= base_url('hari') ?>"> Hari</a></li> -->
                     </ul>
                 </li>
                 <li class="<?= $this->uri->segment(1) == 'jadwal-khusus' ? 'active' : '' ?>">
