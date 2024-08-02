@@ -86,16 +86,20 @@ if ($message == "#jadwalsaya") {
             // Jika hari berbeda, tambahkan garis pemisah
             if ($current_day != $row2['hari']) {
                 if ($current_day != "") {
-                    $jadwal_list .= "---\n\n"; // Pemisah antar hari
+                    $jadwal_list .= "============#########===========\n\n"; // Pemisah antar hari
                 }
                 $current_day = $row2['hari'];
             }
+
+            // Format jam dari 'HH:MM:SS' menjadi 'HH:MM'
+            $jam_mulai = date('H:i', strtotime($row2['jam_mulai']));
+            $jam_selesai = date('H:i', strtotime($row2['jam_selesai']));
 
             // Tambahkan informasi jadwal dengan format bold
             $jadwal_list .= "*Mata Pelajaran*: " . $row2['nama_mapel'] . "\n";
             $jadwal_list .= "*Hari*: " . $row2['hari'] . "\n";
             $jadwal_list .= "*Kelas*: " . $row2['id_kelas'] . "\n";
-            $jadwal_list .= "*Jam*: " . $row2['jam_mulai'] . " s/d " . $row2['jam_selesai'] . "\n\n";
+            $jadwal_list .= "**Jam**: " . $jam_mulai . " s/d " . $jam_selesai . " WITA" . "\n\n";
         }
 
         $reply = [
