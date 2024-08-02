@@ -9,10 +9,14 @@ $data = json_decode($json, true);
 $device = $data['device'];
 $sender = $data['sender'];
 $message = $data['message'];
-$name = $data['name'] ?? '';
-$url = $data['url'] ?? '';
-$filename = $data['filename'] ?? '';
-$extension = $data['extension'] ?? '';
+$member = $data['member']; //group member who send the message
+$name = $data['name'];
+$location = $data['location'];
+//data below will only received by device with all feature package
+//start
+$url =  $data['url'];
+$filename =  $data['filename'];
+$extension =  $data['extension'];
 
 // Database connection details
 $servername = "localhost";
