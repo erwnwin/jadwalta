@@ -25,7 +25,7 @@ class Notifikasi extends CI_Controller
         $sql1 = "SELECT * FROM penjadwalan JOIN mapelku ON penjadwalan.id_mapel=mapelku.id_mapel JOIN guru ON penjadwalan.id_guru=guru.id_guru JOIN kelasku ON penjadwalan.id_kelas=kelasku.id_kelas WHERE hari='$hari' ";
         $result1 = $conn->query($sql1);
         //display data on web page 
-        $token = "r5-2#s!RR_b6umzdW4pm";
+        $token = "R1bqBzS9scy-5+uYzRHq";
         while ($row = mysqli_fetch_array($result1)) {
             $target = "62" . $row['telp_wa'];
 

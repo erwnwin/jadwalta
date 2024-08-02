@@ -36,7 +36,7 @@ function sendFonnte($target, $data)
             'filename' => $data['filename'],
         ),
         CURLOPT_HTTPHEADER => array(
-            "Authorization: TOKEN"
+            "Authorization: R1bqBzS9scy-5+uYzRHq"
         ),
     ));
 
