@@ -59,6 +59,11 @@
                         <li class="<?= $this->uri->segment(1) == 'jam' ? 'active' : '' ?>"><a href="<?= base_url('jam') ?>"> Jam</a></li>
                     </ul>
                 </li>
+                <li class="<?= $this->uri->segment(1) == 'guru' ? 'active' : '' ?>">
+                    <a href="<?= base_url('guru') ?>">
+                        <i class="fa fa-users"></i> <span>Data Guru</span>
+                    </a>
+                </li>
                 <li class="<?= $this->uri->segment(1) == 'guru-pengampu' ? 'active' : '' ?>">
                     <a href="<?= base_url('guru-pengampu') ?>">
                         <i class="fa fa-users"></i> <span>Guru Pengampu</span>
