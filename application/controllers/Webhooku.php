@@ -62,9 +62,9 @@ if ($message == "#jadwalsaya") {
     if (mysqli_num_rows($result2) > 0) {
         $jadwal_list = "";
         while ($row2 = mysqli_fetch_assoc($result2)) {
-            $jadwal_list .= "Mata Pelajaran: " . $row2['mata_pelajaran'] . "\n";
+            $jadwal_list .= "Mata Pelajaran: " . $row2['nama_mapel'] . "\n";
             $jadwal_list .= "Hari: " . $row2['hari'] . "\n";
-            $jadwal_list .= "Kelas: " . $row2['kelas'] . " " . $row2['urutan_kelas'] . "\n";
+            $jadwal_list .= "Kelas: " . $row2['id_kelas'] . "\n";
             $jadwal_list .= "Jam: " . $row2['jam_mulai'] . "s/d" . $row2['jam_selesai'] . "\n\n";
         }
 
