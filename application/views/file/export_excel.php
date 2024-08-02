@@ -71,13 +71,13 @@ function getkodeMapel($mapel, $idMapel)
 
     <page size="A4">
         <table class="frame">
-            <tr>
+            <!-- <tr>
                 <td colspan="2" style="height: 145px;">
                     <center>
                         <img src="<?= base_url("assets/img/logo.png") ?>" alt="kop smk">
                     </center>
                 </td>
-            </tr>
+            </tr> -->
             <tr>
                 <td colspan="2">
                     <?php if ($guru != null) : ?>
