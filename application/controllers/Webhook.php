@@ -38,7 +38,7 @@ $password1 = md5($row1['password']);
 // select telp/wa
 // $telp_waku1 = '6282194460105';
 
-$hasil  = mysqli_query($koneksi, "SELECT * FROM penjadwalan INNER JOIN guru ON guru.id_guru = penjadwalan.id_guru WHERE guru.telp_wa='$telp_waku1'") or die(mysqli_error($koneksi));
+$hasil  = mysqli_query($koneksi, "SELECT * FROM penjadwalan INNER JOIN guru ON guru.id_guru = penjadwalan.id_guru WHERE guru.telp_wa='$telp_wa1'") or die(mysqli_error($koneksi));
 
 function sendFonnte($target, $data)
 {
