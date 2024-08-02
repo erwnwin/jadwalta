@@ -59,13 +59,43 @@ if ($message == "#jadwalsaya") {
              WHERE guru.telp_wa='$telp_wa1'";
     $result2 = mysqli_query($koneksi, $sql2);
 
+    // if (mysqli_num_rows($result2) > 0) {
+    //     $jadwal_list = "";
+    //     while ($row2 = mysqli_fetch_assoc($result2)) {
+    //         $jadwal_list .= "Mata Pelajaran: " . $row2['nama_mapel'] . "\n";
+    //         $jadwal_list .= "Hari: " . $row2['hari'] . "\n";
+    //         $jadwal_list .= "Kelas: " . $row2['id_kelas'] . "\n";
+    //         $jadwal_list .= "Jam: " . $row2['jam_mulai'] . "s/d" . $row2['jam_selesai'] . "\n\n";
+    //     }
+
+    //     $reply = [
+    //         "message" => "Jadwal Anda adalah:\n\n" . $jadwal_list .
+    //             "Pesan ini dikirim secara otomatis oleh sistem",
+    //     ];
+    // } else {
+    //     $reply = [
+    //         "message" => "Tidak ada jadwal yang ditemukan untuk Anda.\n\nPesan ini dikirim secara otomatis oleh sistem",
+    //     ];
+    // }
+
     if (mysqli_num_rows($result2) > 0) {
         $jadwal_list = "";
+        $current_day = ""; // Untuk melacak hari saat ini
+
         while ($row2 = mysqli_fetch_assoc($result2)) {
-            $jadwal_list .= "Mata Pelajaran: " . $row2['nama_mapel'] . "\n";
-            $jadwal_list .= "Hari: " . $row2['hari'] . "\n";
-            $jadwal_list .= "Kelas: " . $row2['id_kelas'] . "\n";
-            $jadwal_list .= "Jam: " . $row2['jam_mulai'] . "s/d" . $row2['jam_selesai'] . "\n\n";
+            // Jika hari berbeda, tambahkan garis pemisah
+            if ($current_day != $row2['hari']) {
+                if ($current_day != "") {
+                    $jadwal_list .= "---\n\n"; // Pemisah antar hari
+                }
+                $current_day = $row2['hari'];
+            }
+
+            // Tambahkan informasi jadwal dengan format bold
+            $jadwal_list .= "**Mata Pelajaran**: " . $row2['nama_mapel'] . "\n";
+            $jadwal_list .= "**Hari**: " . $row2['hari'] . "\n";
+            $jadwal_list .= "**Kelas**: " . $row2['id_kelas'] . "\n";
+            $jadwal_list .= "**Jam**: " . $row2['jam_mulai'] . " s/d " . $row2['jam_selesai'] . "\n\n";
         }
 
         $reply = [
