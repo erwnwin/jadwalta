@@ -249,21 +249,40 @@ class M_jadwal extends CI_Model
     }
 
 
+    // public function resetPenjadwalan()
+    // {
+    //     $this->db->query('UPDATE penjadwalan 
+    //     SET 
+    //         id_guru = NULL, 
+    //         id_mapel = NULL, 
+    //         kode_jadwal = "-", 
+    //         keterangan = "kosong" 
+    //     WHERE 
+    //         id_guru IS NOT NULL AND id_guru != "" 
+    //         AND id_mapel IS NOT NULL AND id_mapel != ""
+    //     ');
+    //     $this->db->query('UPDATE guru_pengampu SET status = "0" WHERE status="1"');
+    //     $this->db->query('UPDATE guru_pengampu SET sisa_jam = beban_jam');
+    // }
+
     public function resetPenjadwalan()
     {
-        $this->db->query('UPDATE penjadwalan 
+        $this->db->query(
+            'UPDATE penjadwalan 
         SET 
             id_guru = NULL, 
             id_mapel = NULL, 
             kode_jadwal = "-", 
             keterangan = "kosong" 
         WHERE 
-            id_guru IS NOT NULL AND id_guru != "" 
-            AND id_mapel IS NOT NULL AND id_mapel != ""
-        ');
+            id_guru IS NOT NULL 
+            AND id_mapel IS NOT NULL'
+        );
+
         $this->db->query('UPDATE guru_pengampu SET status = "0" WHERE status="1"');
         $this->db->query('UPDATE guru_pengampu SET sisa_jam = beban_jam');
     }
+
 
     public function resetJadwal()
     {
