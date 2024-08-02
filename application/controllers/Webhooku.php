@@ -54,6 +54,8 @@ if ($message == "#jadwalsaya") {
     // Fetch jadwal for the given guru
     $sql2 = "SELECT * FROM penjadwalan 
              INNER JOIN guru ON guru.id_guru = penjadwalan.id_guru 
+             INNER JOIN kelasku ON kelasku.id_kelas = penjadwalan.id_kelas 
+             INNER JOIN mapelku ON mapelku.id_mapel = penjadwalan.id_mapel 
              WHERE guru.telp_wa='$telp_wa1'";
     $result2 = mysqli_query($koneksi, $sql2);
 
@@ -62,7 +64,8 @@ if ($message == "#jadwalsaya") {
         while ($row2 = mysqli_fetch_assoc($result2)) {
             $jadwal_list .= "Mata Pelajaran: " . $row2['mata_pelajaran'] . "\n";
             $jadwal_list .= "Hari: " . $row2['hari'] . "\n";
-            $jadwal_list .= "Jam: " . $row2['jam'] . "\n\n";
+            $jadwal_list .= "Kelas: " . $row2['kelas'] . " " . $row2['urutan_kelas'] . "\n";
+            $jadwal_list .= "Jam: " . $row2['jam_mulai'] . "s/d" . $row2['jam_selesai'] . "\n\n";
         }
 
         $reply = [
