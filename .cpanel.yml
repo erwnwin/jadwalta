@@ -1,0 +1,3 @@
+version: 2.0
+runtime:
+  php: 7.4
