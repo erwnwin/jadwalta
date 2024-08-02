@@ -122,5 +122,8 @@ $route['profil/update-pengguna'] = 'Profil/udpate_profil';
 $route['profil/post'] = 'Profil/post';
 // $route['profil/post-akun'] = 'Profil/post_akun';
 
+// chatbot
+$route['chatbot/kirim-chat'] = 'chatbot/receive_message';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
