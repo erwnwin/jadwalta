@@ -127,8 +127,8 @@ function sendFonnte($target, $data)
         CURLOPT_POSTFIELDS => array(
             'target' => $target,
             'message' => $data['message'],
-            'url' => $data['url'] ?? '',
-            'filename' => $data['filename'] ?? '',
+            'url' => $data['url'],
+            'filename' => $data['filename'],
         ),
         CURLOPT_HTTPHEADER => array(
             "Authorization: R1bqBzS9scy-5+uYzRHq"
