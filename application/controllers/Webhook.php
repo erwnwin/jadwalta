@@ -61,7 +61,7 @@ function sendFonnte($target, $data)
         ),
 
         CURLOPT_HTTPHEADER => array(
-            "Authorization: R1bqBzS9scy-5+uYzRHqm"
+            "Authorization: R1bqBzS9scy-5+uYzRHq"
         ),
     ));
     $response = curl_exec($curl);
