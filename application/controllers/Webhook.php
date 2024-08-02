@@ -19,9 +19,9 @@ $extension =  $data['extension'];
 //end
 
 $servername = "localhost";
-$database = "id21923448_jadwalku";
-$username = "id21923448_root";
-$password = "Erwinngg2018#";
+$database = "hvsteofj_jadwalta";
+$username = "hvsteofj_root";
+$password = "@Erwin2024#";
 
 // $conn = new mysqli($servername, $username, $password, $database);
 $koneksi = mysqli_connect($servername, $username, $password, $database);
@@ -36,7 +36,7 @@ $password1 = md5($row1['password']);
 
 
 // select telp/wa
-$telp_waku1 = '6282194460105';
+// $telp_waku1 = '6282194460105';
 
 $hasil  = mysqli_query($koneksi, "SELECT * FROM penjadwalan INNER JOIN guru ON guru.id_guru = penjadwalan.id_guru WHERE guru.telp_wa='$telp_waku1'") or die(mysqli_error($koneksi));
 
