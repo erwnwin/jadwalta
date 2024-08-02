@@ -92,10 +92,10 @@ if ($message == "#jadwalsaya") {
             }
 
             // Tambahkan informasi jadwal dengan format bold
-            $jadwal_list .= "**Mata Pelajaran**: " . $row2['nama_mapel'] . "\n";
-            $jadwal_list .= "**Hari**: " . $row2['hari'] . "\n";
-            $jadwal_list .= "**Kelas**: " . $row2['id_kelas'] . "\n";
-            $jadwal_list .= "**Jam**: " . $row2['jam_mulai'] . " s/d " . $row2['jam_selesai'] . "\n\n";
+            $jadwal_list .= "*Mata Pelajaran*: " . $row2['nama_mapel'] . "\n";
+            $jadwal_list .= "*Hari*: " . $row2['hari'] . "\n";
+            $jadwal_list .= "*Kelas*: " . $row2['id_kelas'] . "\n";
+            $jadwal_list .= "*Jam*: " . $row2['jam_mulai'] . " s/d " . $row2['jam_selesai'] . "\n\n";
         }
 
         $reply = [
