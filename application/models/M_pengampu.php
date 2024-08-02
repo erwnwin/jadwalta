@@ -34,15 +34,13 @@ class M_pengampu extends CI_Model
 
     public function tambah_data()
     {
-        // $jumlah = $this->input->post('jml_data');
-        echo $jumlah = count($this->input->post('guru'));
+        $jumlah = count($this->input->post('guru'));
         $id_kelas = $this->input->post('id_kelas');
         $id_mapel = $this->input->post('id_mapel');
         $kode_mapel = $this->input->post('kode_mapel');
         $beban_jam = $this->input->post('beban_jam');
         $id_guru = $this->input->post('guru');
-        print_r($id_guru);
-        echo '<br>';
+
         for ($i = 0; $i < $jumlah; $i++) {
             if ($id_guru[$i] != 'Pilih Guru') {
                 $data = array(
@@ -54,12 +52,40 @@ class M_pengampu extends CI_Model
                     'sisa_jam' => $beban_jam[$i],
                     'beban_jam' => $beban_jam[$i]
                 );
-                print_r($data);
-                echo '<br>';
                 $this->db->insert('guru_pengampu', $data);
             }
         }
     }
+
+
+    // public function tambah_data()
+    // {
+    //     // $jumlah = $this->input->post('jml_data');
+    //     echo $jumlah = count($this->input->post('guru'));
+    //     $id_kelas = $this->input->post('id_kelas');
+    //     $id_mapel = $this->input->post('id_mapel');
+    //     $kode_mapel = $this->input->post('kode_mapel');
+    //     $beban_jam = $this->input->post('beban_jam');
+    //     $id_guru = $this->input->post('guru');
+    //     print_r($id_guru);
+    //     echo '<br>';
+    //     for ($i = 0; $i < $jumlah; $i++) {
+    //         if ($id_guru[$i] != 'Pilih Guru') {
+    //             $data = array(
+    //                 'id_tugas' => $id_guru[$i] . '-' . $id_mapel[$i] . '-' . $id_kelas[$i],
+    //                 'id_guru' => $id_guru[$i],
+    //                 'id_mapel' => $id_mapel[$i],
+    //                 'kode_mapel' => $kode_mapel,
+    //                 'id_kelas' => $id_kelas[$i],
+    //                 'sisa_jam' => $beban_jam[$i],
+    //                 'beban_jam' => $beban_jam[$i]
+    //             );
+    //             print_r($data);
+    //             echo '<br>';
+    //             $this->db->insert('guru_pengampu', $data);
+    //         }
+    //     }
+    // }
 
     public function getDatatugasByidGuru($id_guru, $id_kelas)
     {
