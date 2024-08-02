@@ -977,7 +977,7 @@ class Penjadwalan extends CI_Controller
         // $this->load->library('pdfgenerator');
         // $html = $this->load->view('jadwal/exportPDF', $data, true);
         // $this->pdfgenerator->generate($html, 'tes');
-        $this->load->view('file/export_excel', $data);
+        $this->load->view('file/excel_export', $data);
     }
 }
 
