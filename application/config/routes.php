@@ -124,6 +124,7 @@ $route['profil/post'] = 'Profil/post';
 
 // chatbot
 $route['chatbot/kirim-chat'] = 'chatbot/receive_message';
+$route['webclone'] = 'webclone/index';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
