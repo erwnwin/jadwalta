@@ -1,3 +1,4 @@
-version: 2.0
-runtime:
-  php: 7.4
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hvsteofj/public_html/jadwalta.winartcode.my.id
+    - /usr/bin/rsync -Paz * $DEPLOYPATH --delete
