@@ -16,7 +16,7 @@ class Notifikasi extends CI_Controller
         // echo date('Y-m-d H:i:s');
 
         $servername = "localhost";
-        $database = "hvsteofj_jadwalta";
+        $database = "hvsteofj_jadwalku";
         $username = "hvsteofj_root";
         $password = "@Erwin2024#";
 

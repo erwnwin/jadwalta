@@ -3,7 +3,7 @@
         <div class="pull-right hidden-xs">
             Versi 1.3
         </div>
-        <strong>Copyright &copy; 2024 | Made with <i class="fa fa-heart"></i> by <a href="#">TIM ICT.</a></strong>
+        <strong>Copyright &copy; 2024 | Made with <i class="fa fa-heart"></i> by <a href="#">Titik Balik Teknologi</a></strong>
     </div>
     <!-- /.container -->
 </footer>
