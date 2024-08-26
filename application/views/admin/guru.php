@@ -271,10 +271,11 @@
                              <div class="form-group">
                                  <label class="col-sm-4 control-label">No WhatsApp <span class="text-danger">*(aktif)</span></label>
                                  <div class="col-sm-8">
-                                     <div class="input-group">
-                                         <span class="input-group-addon"><b>+62</b></span>
-                                         <input type="text" name="telp_wa" class="form-control" required="required" value="<?= $g->telp_wa ?>" maxlength="13" placeholder="821xxxxxxx" autocomplete="off" />
-                                     </div>
+                                     <!-- <div class="input-group"> -->
+                                     <!-- <span class="input-group-addon"><b>+62</b></span> -->
+                                     <input type="text" name="telp_wa" class="form-control" required="required" value="<?= $g->telp_wa ?>" maxlength="13" placeholder="62821xxxxxxx" autocomplete="off" />
+                                     <span class="text-danger text-small">Format penulisan no telp untuk update <strong>6281xxxxxx</strong></span>
+                                     <!-- </div> -->
                                  </div>
                              </div>
 

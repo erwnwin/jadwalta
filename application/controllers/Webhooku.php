@@ -50,7 +50,7 @@ if (mysqli_num_rows($result1) > 0) {
 }
 
 // Handle message based on the received command
-if ($message == "/jadwalsaya") {
+if ($message == "#jadwalsaya") {
     // Fetch jadwal for the given guru
     $sql2 = "SELECT * FROM penjadwalan 
              INNER JOIN guru ON guru.id_guru = penjadwalan.id_guru 
@@ -111,7 +111,7 @@ if ($message == "/jadwalsaya") {
             "message" => "Tidak ada jadwal yang ditemukan untuk Anda.\n\nPesan ini dikirim secara otomatis oleh sistem",
         ];
     }
-} elseif ($message == "/akunsaya") {
+} elseif ($message == "#akunsaya") {
     if ($telp_wa1 == $sender) {
         $reply = [
             "message" => "*Hai " . $nama1 . "*\n\n" .
@@ -126,7 +126,7 @@ if ($message == "/jadwalsaya") {
             "message" => "Maaf tidak ditemukan data terkait.\n\nPesan ini dikirim secara otomatis oleh sistem",
         ];
     }
-} elseif ($message == "/nomorhpguru") {
+} elseif ($message == "#nomorhpguru") {
     $reply = [
         "message" => "Nomor HP Guru dapat dilihat pada halaman utama SiJadwalTa pada menu Lainnya >> No. HP/WA Guru\n\n" .
             "Pesan ini dikirim secara otomatis oleh sistem",
