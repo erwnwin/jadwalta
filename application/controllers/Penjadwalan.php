@@ -202,7 +202,7 @@ class Penjadwalan extends CI_Controller
         // Ambil data yang diperlukan
         $jadwal = $this->m_jadwal->getAllData();
         $kelas = $this->m_kelas->getAllData();
-        $jadwalKhusus = $this->m_khusus->getAllData();
+        $jadwalKhusus = $this->m_khusus->getAllDataNew();
 
         foreach ($kelas as $rowKelas) {
             $kosong = 0;

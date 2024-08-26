@@ -1,9 +1,9 @@
 <footer class="main-footer">
     <div class="container">
         <div class="pull-right hidden-xs">
-            Versi 1.3
+            Anything you want
         </div>
-        <strong>Copyright &copy; 2024 | Made with <i class="fa fa-heart"></i> by <a href="#">Titik Balik Teknologi</a></strong>
+        Copyright &copy; 2022 - <?= date('Y') ?> <strong>Titik Balik Teknologi</a></strong>
     </div>
     <!-- /.container -->
 </footer>

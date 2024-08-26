@@ -19,14 +19,23 @@ class M_mapel extends CI_Model
     }
 
 
-
     public function mapel()
     {
-        $this->db->select('*');
+        // $this->db->select('mapelku.kode_mapel, mapelku.nama_mapel, mapelku.beban_jam, mapelku.id_mapel, kelasku.id_kelas'); // Pilih kolom yang diinginkan
+        // $this->db->from('mapelku');
+        // $this->db->join('kelasku', 'mapelku.id_kelas = kelasku.id_kelas', 'left');
+        // $this->db->group_by('mapelku.kode_mapel, mapelku.nama_mapel'); // Kelompokkan berdasarkan kode dan nama mapel
+
+        // return $this->db->get()->result(); // Ambil hasil dan kembalikan
+        $this->db->select('mapelku.kode_mapel, mapelku.nama_mapel, GROUP_CONCAT(kelasku.id_kelas SEPARATOR ", ") as kelas, mapelku.beban_jam');
         $this->db->from('mapelku');
         $this->db->join('kelasku', 'mapelku.id_kelas = kelasku.id_kelas', 'left');
+        $this->db->group_by('mapelku.kode_mapel, mapelku.nama_mapel, mapelku.beban_jam');
+
         return $this->db->get()->result();
     }
+
+
 
 
     public function tambah_data()

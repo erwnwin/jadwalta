@@ -19,9 +19,38 @@ class M_khusus extends CI_Model
     {
         $this->db->select('id_jadwal_khusus, kelas, hari, keterangan, sesi, durasi');
         $this->db->from('jadwal_khusus');
+        $this->db->group_by('hari');
+        // $this->db->group_by('kelas');
+        // $this->db->group_by('keterangan'); // Kelompokkan berdasarkan keterangan untuk mendapatkan data yang unik
+        return $this->db->get()->result_array();
+        // $this->db->select('id_jadwal_khusus, kelas, hari, keterangan, sesi, durasi');
+        // $this->db->from('jadwal_khusus');
+        // return $this->db->get()->result_array();
+    }
+
+    
+
+    public function getAllDataNew()
+    {
+        $this->db->select('id_jadwal_khusus, kelas, hari, keterangan, sesi, durasi');
+        $this->db->from('jadwal_khusus');
         return $this->db->get()->result_array();
     }
 
+    // public function getJadwalWithSameKeterangan()
+    // {
+    //     $this->db->select('id_jadwal_khusus, kelas, hari, keterangan, sesi, durasi');
+    //     $this->db->from('jadwal_khusus');
+    //     $this->db->order_by('keterangan');
+    //     $query = $this->db->get()->result_array();
+
+    //     $result = [];
+    //     foreach ($query as $row) {
+    //         $result[$row['keterangan']][] = $row;
+    //     }
+
+    //     return $result;
+    // }
 
 
     public function tambah_data()

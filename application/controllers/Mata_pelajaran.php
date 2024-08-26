@@ -21,6 +21,7 @@ class Mata_pelajaran extends CI_Controller
         $data['title'] = "Mata Pelajaran : SiJadwalTa";
 
         $data['mapel'] = $this->m_mapel->mapel();
+        $data['mapelku'] = $this->m_mapel->getAllData();
 
         $this->load->view('template/head', $data);
         $this->load->view('template/header', $data);
@@ -63,6 +64,41 @@ class Mata_pelajaran extends CI_Controller
         Data mata pelajaran berhasil disimpan!
         </div>');
         redirect(base_url('mata-pelajaran'));
+    }
+
+
+    public function delete_mapel($kode_mapel)
+    {
+        // Cek apakah kode_mapel digunakan oleh guru pengampu
+        $this->db->select('kode_mapel');
+        $this->db->from('guru_pengampu');
+        $this->db->where('kode_mapel', $kode_mapel);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            // Jika ada data di tabel guru_pengampu yang berelasi dengan kode_mapel
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Gagal Hapus</h4>
+            Data tidak dapat dihapus karena mapel telah ada guru pengampunya. Silahkan lakukan edit saja.
+            </div>');
+            redirect(base_url('mata-pelajaran'));
+        } else {
+            // Hapus data dari tabel mapelku dan tabel terkait lainnya
+            $this->db->where('kode_mapel', $kode_mapel);
+            $this->db->delete('mapelku');
+
+            // Hapus data dari tabel terkait lainnya jika ada
+            // $this->db->where('kode_mapel', $kode_mapel);
+            // $this->db->delete('kelasku'); // Misalnya, jika ada tabel kelas terkait
+
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Sukses</h4>
+            Data mapel berhasil dihapus!
+            </div>');
+            redirect(base_url('mata-pelajaran'));
+        }
     }
 }
 

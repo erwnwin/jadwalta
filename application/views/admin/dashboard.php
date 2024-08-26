@@ -14,18 +14,23 @@
 
 
         <div class="text-center">
-            <?php
-            $ta = $this->db->query("SELECT * FROM tahun_akademik
-                        WHERE status='Aktif'")->result();
+            <!-- <?php
+                    $ta = $this->db->query("SELECT * FROM tahun_akademik")->result();
 
-            ?>
-            <div class='callout callout-danger'>
-                <?php foreach ($ta as $t) { ?>
-                    <h4>Semester <?= $t->status ?>
-                        <hr style="border-top: 1.5px solid #FFFF;"><?= $t->tahun_akademik ?> <?= $t->tipe_semester ?>
-                    </h4>
+                    ?> -->
+
+            <?php foreach ($ta as $t) { ?>
+                <?php if ($t->status == 'Non Aktif') { ?>
+
+                <?php } else { ?>
+                    <div class='callout callout-danger'>
+                        <h4>Semester <?= $t->status ?>
+                            <hr style="border-top: 1.5px solid #FFFF;"><?= $t->tahun_akademik ?> <?= $t->tipe_semester ?>
+                        </h4>
+                    </div>
                 <?php } ?>
-            </div>
+            <?php } ?>
+
         </div>
         <!-- Info boxes -->
 

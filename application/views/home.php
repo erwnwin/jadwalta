@@ -71,7 +71,7 @@
                 <div class="box-footer no-padding">
                     <ul class="nav nav-stacked">
                         <li><a>Pengunjung Hari ini <span class="pull-right badge bg-red" data-toggle="tooltip" title="<?php echo $pengunjunghariini ?> Orang"><?php echo $pengunjunghariini ?></span> </a></li>
-                        <li><a>Pengunjung Online <span class="pull-right badge bg-aqua" data-toggle="tooltip" title="<?php echo $pengunjungonline ?> Orang"><?php echo $pengunjungonline ?></span></a></li>
+                        <!-- <li><a>Pengunjung Online <span class="pull-right badge bg-aqua" data-toggle="tooltip" title="<?php echo $pengunjungonline ?> Orang"><?php echo $pengunjungonline ?></span></a></li> -->
                         <li class="bg-danger"><a>Total Akses Pengunjung Keseluruhan <span class="pull-right badge bg-green" data-toggle="tooltip" title="<?php echo $totalpengunjung ?> Orang"><?php echo $totalpengunjung ?></span></a></li>
 
                     </ul>

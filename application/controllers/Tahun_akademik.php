@@ -86,7 +86,33 @@ class Tahun_akademik extends CI_Controller
             <h4><i class="icon fa fa-check"></i> Diaktifkan</h4>
             Data tahun akademik berhasil diaktifkan!
             </div>');
+            redirect(base_url('tahun-akademik'));
         }
+    }
+
+    public function act_nonaktif($id_ta)
+    {
+
+        $id_ta = $this->input->post('id_ta');
+        $status = 'Aktif';
+
+        $data = array(
+            'id_ta' => $id_ta,
+            'status' => 'Non Aktif',
+        );
+
+        $where = array(
+            'id_ta' => $id_ta,
+        );
+
+
+        $this->db->update('tahun_akademik', $data, $where);
+        $this->session->set_flashdata('pesan', '<div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> DiNonAktifkan</h4>
+            Data tahun akademik berhasil diNonAktifkan!
+            </div>');
+        redirect(base_url('tahun-akademik'));
     }
 }
 

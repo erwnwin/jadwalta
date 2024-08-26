@@ -3,8 +3,8 @@
      <!-- Content Header (Page header) -->
      <section class="content-header">
          <h1>
-             <h1>Data Jam</h1>
-             <p>Daftar jam yang digunakan</p>
+             <h1>Pengaturan Sesi/Durasi</h1>
+             <p>Mengatur durasi per sesi, sesi perhari dan jam mulai dari setiap sesi</p>
          </h1>
 
      </section>
@@ -13,7 +13,7 @@
      <section class="content">
          <?php echo $this->session->flashdata('pesan') ?>
 
-         <div class="box box-warning collapsed-box">
+         <!-- <div class="box box-warning collapsed-box">
              <div class="box-header with-border">
                  <h3 class="box-title">Create Range Jam</h3>
 
@@ -73,7 +73,7 @@
                      </div>
                  </form>
              </div>
-         </div>
+         </div> -->
 
 
 
@@ -128,7 +128,7 @@
                                  <td class="text-center"><?= $r->jam_mulai ?></td>
                                  <td class="text-center">
                                      <!-- <button type=" button" data-toggle="modal" data-target="#modal-edit<?= $r->range_jam ?>" class="btn btn-sm btn-flat btn-warning"> <i class="fa fa-edit"></i></button> -->
-                                     <button type="button" data-toggle="modal" data-target="#modal-hapus<?= $r->id_jadwal ?>" class="btn btn-sm btn-flat btn-danger"> <i class="fa fa-trash"></i></button>
+                                     <button type="button" data-toggle="modal" data-target="#editModal<?= $r->id_jadwal ?>" class="btn btn-sm btn-flat btn-warning"> <i class="fa fa-edit"></i></button>
                                  </td>
                              </tr>
                          <?php } ?>
@@ -142,7 +142,70 @@
 
      </section>
      <!-- /.content -->
+     <?php foreach ($range_jam as $r) { ?>
+         <div class="modal fade" id="editModal<?= $r->id_jadwal ?>">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span></button>
+                         <h4 class="modal-title">Edit Data Sesi per Hari / Durasi per Sesi</h4>
+                     </div>
+                     <div class="modal-body">
+                         <form action="<?= base_url() ?>jam/act-update" method="post" class="form-horizontal">
+                             <div class="form-group">
+                                 <label class="col-sm-4 control-label">Hari</label>
+                                 <div class="col-sm-8">
 
+                                     <?php
+                                        $hari = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum`at', 'Sabtu'];
+                                        foreach ($hari as $value) {
+                                            $checked = '';
+                                            if (in_array($value, array_column($range_jam, 'hari'))) {
+                                                $checked = 'disabled checked';
+                                            }
+                                        ?>
+                                         <div class="form-check form-check-inline">
+                                             <input class="form-check-input flat-red" name="chkJadwalHari[]" type="checkbox" id="<?= $value ?>" value="<?= $value ?>" <?= $checked ?>>
+                                             <label class="form-check-label" for="<?= $value ?>"><?= $value ?></label>
+                                         </div>
+                                     <?php } ?>
+                                 </div>
+                             </div>
+
+                             <div class="form-group">
+                                 <label class="col-sm-4 control-label">Sesi Per Hari</label>
+                                 <div class="col-sm-8">
+                                     <input type="hidden" name="id_jadwal" class="form-control" value="<?= $r->id_jadwal ?>">
+                                     <input type="number" class="form-control" value="<?= $r->jumlah_sesi ?>" required="required" name="jumlah_sesi" id="sesi" min="5" max="20" placeholder="Minimal input 5" autocomplete="off" />
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <label class="col-sm-4 control-label">Waktu Per Sesi</label>
+                                 <div class="col-sm-8">
+                                     <input type="number" name="lama_sesi" id="durasi" min="10" max="60" class="form-control" required="required" value="<?= $r->lama_sesi ?>" placeholder="Minimal input 10" autocomplete="off" />
+                                 </div>
+                             </div>
+
+                             <div class="form-group">
+                                 <label class="col-sm-4 control-label">Sesi Dimulai</label>
+                                 <div class="col-sm-8">
+                                     <input type="time" name="jam_mulai" id="waktuMulai" class="form-control" required="required" value="<?= $r->jam_mulai ?>" placeholder="Minimal input 10" autocomplete="off" />
+                                 </div>
+                             </div>
+
+                             <div class="form-group">
+                                 <label class="col-sm-4 control-label"></label>
+                                 <div class="col-sm-8">
+                                     <button type="submit" class="btn btn-sm btn-flat btn-success"><i class="fa fa-save"></i> Simpan</button>
+                                 </div>
+                             </div>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     <?php } ?>
 
 
 

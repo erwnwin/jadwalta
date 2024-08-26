@@ -49,7 +49,7 @@
                      </div>
                  </div>
                  <div class="box-body">
-                     <table class="table table-bordered table-striped table-hover">
+                     <table class="table table-sm table-bordered table-striped table-hover">
                          <tr>
                              <th style="width: 10px" class="bg-success">#</th>
                              <th class="bg-success">NIP/NIK</th>
@@ -60,7 +60,8 @@
                          </tr>
                          <?php $no = 1;
                             foreach ($guru as $g) { ?>
-                             <tr style="background-color: <?= $g->warna_guru ?>;">
+                             <!-- <tr style="background-color: <?= $g->warna_guru ?>;"> -->
+                             <tr>
                                  <td><?= $no++ ?></td>
                                  <td><?= $g->nip_nik ?></td>
                                  <td><?= $g->nama ?></td>

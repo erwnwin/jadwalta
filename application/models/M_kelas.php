@@ -13,6 +13,13 @@ class M_kelas extends CI_Model
         return $query->result();
     }
 
+    public function get_kelas_by_id($id_kelas)
+    {
+        $this->db->where('id_kelas', $id_kelas);
+        $query = $this->db->get('kelasku');
+        return $query->row(); // Mengembalikan satu baris data
+    }
+
     public function ruang()
     {
         return $this->db->get('ruang')->result();

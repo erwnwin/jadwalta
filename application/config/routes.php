@@ -59,6 +59,9 @@ $route['jadwal-khusus'] = 'Jadwal_khusus';
 $route['jadwal-khusus/views'] = 'Jadwal_khusus/views';
 $route['jadwal-khusus/views/(:any)'] = 'Jadwal_khusus/views/$1';
 $route['jadwal-khusus/act-add'] = 'Jadwal_khusus/act_add';
+$route['jadwal-khusus/act-update'] = 'Jadwal_khusus/act_update';
+$route['jadwal-khusus/delete'] = 'Jadwal_khusus/delete';
+
 
 // req_jadwal
 $route['request-jadwal'] = 'Request_jadwal';
@@ -68,6 +71,7 @@ $route['request-jadwal/act-add'] = 'Request_jadwal/act_add';
 $route['mata-pelajaran'] = 'Mata_pelajaran';
 $route['mata-pelajaran/act-add'] = 'Mata_pelajaran/add_act';
 $route['mata-pelajaran/act-add2'] = 'Mata_pelajaran/validation_form';
+$route['mata-pelajaran/delete/(:any)'] = 'mata_pelajaran/delete_mapel/$1';
 
 // guru-pengampu
 $route['guru-pengampu'] = 'Guru_pengampu';
@@ -78,6 +82,7 @@ $route['guru-pengampu/create-pengampu/(:any)'] = 'Guru_pengampu/create_pengampu/
 $route['tahun-akademik'] = 'Tahun_akademik';
 $route['tahun-akademik/act-add'] = 'Tahun_akademik/add_act';
 $route['tahun-akademik/act-aktif/(:num)'] = 'Tahun_akademik/act_aktif/$1';
+$route['tahun-akademik/act-nonaktif/(:num)'] = 'Tahun_akademik/act_nonaktif/$1';
 
 // guru
 $route['guru/act-add'] = 'Guru/add_act';
@@ -91,8 +96,8 @@ $route['ruangan/act-hapus/(:num)'] = 'Ruangan/hapus_act/$1';
 
 // kelas
 $route['kelas/act-add'] = 'Kelas/add_act';
-$route['kelas/act-edit'] = 'Kelas/edit_act';
-$route['kelas/act-hapus/(:num)'] = 'Kelas/hapus_act/$1';
+$route['kelas/act-update'] = 'Kelas/edit_act';
+$route['kelas/delete/(:any)'] = 'Kelas/delete_kelas/$1';
 
 $route['webhook'] = 'Webhook';
 

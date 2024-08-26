@@ -35,9 +35,40 @@ class M_guru extends CI_Model
 
     public function hapus($id)
     {
+
+        // Cek apakah ada komentar terkait post ini
         $this->db->where('id_guru', $id);
-        return $this->db->delete('guru');
+        $pengampu = $this->db->count_all_results('guru_pengampu');
+
+        if ($pengampu > 0) {
+            // Tidak diizinkan menghapus jika ada komentar terkait
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Oppss!!</h4>
+            Data Guru ini terdaftar pada GURU PENGAMPU
+            </div>');
+            // $this->session->set_flashdata('valid', 'Opps!! Data gagal dihapus<br>Data Guru ini terdaftar pada GURU PENGAMPU');
+            return false;
+        } else {
+            // Hapus post jika tidak ada komentar terkait
+            $this->db->where('id_guru', $id);
+            $this->db->delete('guru');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check-circle"></i> Dihapus</h4>
+            Data guru berhasil dihapus!
+            </div>');
+            // $this->session->set_flashdata('gagal', 'Nice!!<br>Berhasil dihapus');
+            return true;
+        }
+
+        // $this->db->delete('guru', ['id_guru' => $id]);
     }
+    // public function hapus($id)
+    // {
+    //     $this->db->where('id_guru', $id);
+    //     return $this->db->delete('guru');
+    // }
 
     public function getDataGuruJoinRequest()
     {

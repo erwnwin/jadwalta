@@ -69,11 +69,11 @@
                         <i class="fa fa-users"></i> <span>Guru Pengampu</span>
                     </a>
                 </li>
-                <li class="<?= $this->uri->segment(1) == 'request-jadwal' ? 'active' : '' ?>">
+                <!-- <li class="<?= $this->uri->segment(1) == 'request-jadwal' ? 'active' : '' ?>">
                     <a href="<?= base_url('request-jadwal') ?>">
                         <i class="fa fa-table"></i> <span>Request Jadwal</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="<?= $this->uri->segment(1) == 'tahun-akademik' ? 'active' : '' ?>">
                     <a href=" <?= base_url('tahun-akademik') ?>">
                         <i class="fa fa-calendar"></i> <span>Tahun Akademik</span>
@@ -113,11 +113,11 @@
 
                     </ul>
                 </li>
-                <li class="<?= $this->uri->segment(1) == 'ruangan' ? 'active' : '' ?>">
+                <!-- <li class="<?= $this->uri->segment(1) == 'ruangan' ? 'active' : '' ?>">
                     <a href="<?= base_url('ruangan') ?>">
                         <i class="fa fa-home"></i> <span>Ruangan</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="<?= $this->uri->segment(1) == 'kelas' ? 'active' : '' ?>">
                     <a href="<?= base_url('kelas') ?>">
                         <i class="fa fa-building"></i> <span>Kelas</span>
@@ -129,18 +129,13 @@
                     </a>
                 </li>
 
-                <li class="treeview <?= $this->uri->segment(1) == 'jam' || $this->uri->segment(1) == 'hari' ? 'menu-open'  : '' ?> <?= $this->uri->segment(1) == 'jam' || $this->uri->segment(1) == 'hari' ? 'active'  : '' ?>">
-                    <a href="#">
-                        <i class="fa fa-clock-o"></i> <span>Waktu</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+
+                <li class="<?= $this->uri->segment(1) == 'jam' ? 'active' : '' ?>">
+                    <a href="<?= base_url('jam') ?>">
+                        <i class="fa fa-clock-o"></i> <span>Atur Sesi</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li class="<?= $this->uri->segment(1) == 'jam' ? 'active' : '' ?>"><a href="<?= base_url('jam') ?>"> Jam</a></li>
-                        <!-- <li class="<?= $this->uri->segment(1) == 'hari' ? 'active' : '' ?>"><a href="<?= base_url('hari') ?>"> Hari</a></li> -->
-                    </ul>
                 </li>
+               
                 <li class="<?= $this->uri->segment(1) == 'jadwal-khusus' ? 'active' : '' ?>">
                     <a href="<?= base_url('jadwal-khusus') ?>">
                         <i class="fa fa-edit"></i> <span>Jadwal Khusus</span>

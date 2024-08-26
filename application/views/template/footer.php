@@ -1,8 +1,8 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-        <b>Versi</b> 1.4
+        Anything you want
     </div>
-    <strong>Copyright &copy; 2024 | Made with <i class="fa fa-heart"></i> by <a href="#">TIM ICT.</a></strong>
+    Copyright &copy; 2022 - <?= date('Y') ?> <strong>Titik Balik Teknologi</strong>
 </footer>
 
 
@@ -52,6 +52,7 @@
 
 
 <!-- js app -->
+<script src="<?= base_url() ?>assets/jadwal/js/delete-jk.js"></script>
 <script src="<?= base_url() ?>assets/jadwal/js/jadwal.js"></script>
 <script src="<?= base_url() ?>assets/jadwal/js/atur.js"></script>
 <script src="<?= base_url() ?>assets/jadwal/js/ganti_pass.js"></script>
@@ -286,6 +287,50 @@
         $('.select3').select2()
     })
 </script>
+
+<script>
+    $('#editModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var id = button.data('id'); // Extract info from data-* attributes
+        var hari = button.data('hari');
+        var keterangan = button.data('keterangan');
+        var sesi = button.data('sesi');
+        var durasi = button.data('durasi');
+        var kelas = button.data('kelas').split(', ');
+
+        var modal = $(this);
+        modal.find('#id_jadwal_khusus').val(id);
+        modal.find('#editHari').val(hari);
+        modal.find('#editKeterangan').val(keterangan);
+        modal.find('#editSesi').val(sesi);
+        modal.find('#editDurasi').val(durasi);
+
+        // Check the checkboxes for kelas
+        $('.form-check-input').prop('checked', false);
+        kelas.forEach(function(item) {
+            $('#kelas' + item).prop('checked', true);
+        });
+    });
+</script>
+
+
+<script>
+    $('#modal-editKelas').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button yang memicu modal
+        var id_kelas = button.data('id'); // Ambil data-id dari button
+        var id_ruang = button.data('id_ruang');
+        var kelas = button.data('kelas');
+        var urutan_kelas = button.data('urutan_kelas');
+
+        var modal = $(this);
+        modal.find('#edit_id_kelas').val(id_kelas);
+        modal.find('#edit_id_ruang').val(id_ruang).trigger('change'); // Atur nilai dan trigger event change
+        modal.find('#edit_kelas').val(kelas).trigger('change'); // Atur nilai dan trigger event change
+        modal.find('#edit_urutan_kelas').val(urutan_kelas).trigger('change'); // Atur nilai dan trigger event change
+    });
+</script>
+
+
 
 <!-- <script type="text/javascript">
     $(document).ready(function() {

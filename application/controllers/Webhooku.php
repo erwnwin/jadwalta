@@ -20,7 +20,7 @@ $extension =  $data['extension'];
 
 // Database connection details
 $servername = "localhost";
-$database = "hvsteofj_jadwalku";
+$database = "hvsteofj_jadwalta";
 $username = "hvsteofj_root";
 $password = "@Erwin2024#";
 
@@ -135,9 +135,9 @@ if ($message == "/jadwalsaya") {
     $reply = [
         "message" => "Mohon Maaf, " . $nama1 . "\n\n" .
             "BOT ini hanya membalas pesan anda dengan kata kunci:\n\n" .
-            "*/jadwalsaya* = untuk mengetahui jadwal mengajar guru\n" .
-            "*/akunsaya* = untuk mengetahui akun login guru\n" .
-            "*/nomorhpguru* = untuk mengetahui nomor hp/wa guru\n\n" .
+            "*#jadwalsaya* = untuk mengetahui jadwal mengajar guru\n" .
+            "*#akunsaya* = untuk mengetahui akun login guru\n" .
+            "*#nomorhpguru* = untuk mengetahui nomor hp/wa guru\n\n" .
             "Pesan ini dikirim secara otomatis oleh sistem",
     ];
 }

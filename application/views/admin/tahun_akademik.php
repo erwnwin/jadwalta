@@ -77,7 +77,7 @@
                                          <button type="button" data-toggle="modal" data-target="#modal-edit<?= $r->id_ta ?>" class="btn btn-sm btn-flat btn-warning"> <i class="fa fa-edit"></i></button>
                                          <button type="button" data-toggle="modal" data-target="#modal-hapus<?= $r->id_ta ?>" class="btn btn-sm btn-flat btn-danger"> <i class="fa fa-trash"></i></button>
                                      <?php } else { ?>
-                                         <button type="button" data-toggle="modal" title="Non Aktifkan" data-target="#modal-nonAktif<?= $r->id_ta ?>" class="btn btn-sm btn-flat btn-primary"> <i class="fa fa-times"></i></button>
+                                         <button type="button" data-toggle="modal" title="Non Aktifkan" data-target="#modal-NonAktif<?= $r->id_ta ?>" class="btn btn-sm btn-flat btn-primary"> <i class="fa fa-times"></i></button>
                                          <button type="button" data-toggle="modal" data-target="#modal-edit<?= $r->id_ta ?>" class="btn btn-sm btn-flat btn-warning"> <i class="fa fa-edit"></i></button>
                                          <button type="button" data-toggle="modal" data-target="#modal-hapus<?= $r->id_ta ?>" class="btn btn-sm btn-flat btn-danger"> <i class="fa fa-trash"></i></button>
                                      <?php } ?>
@@ -210,6 +210,37 @@
                          </div>
                          <div class="box-footer">
                              <button name="cmdSimpanPerguruanTinggiAsalMahasiswa" id="cmdSimpanPerguruanTinggiAsalMahasiswa" class="btn btn-flat btn-danger pull-left" value="SimpanPerguruanTinggiAsalMahasiswa"><i class="fa fa-check"></i> Aktifkan</button>
+                             <button type="button" class="btn btn-flat btn-default pull-right" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
+                         </div>
+                     </form>
+
+
+                 </div>
+                 <!-- /.modal-content -->
+             </div>
+             <!-- /.modal-dialog -->
+         </div>
+     <?php  } ?>
+
+
+     <?php foreach ($ta as $g) { ?>
+         <div class="modal fade" id="modal-NonAktif<?= $g->id_ta ?>">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">&times;</span></button>
+                         <h4 class="modal-title">Non Aktifkan Tahun Akademik?</h4>
+                     </div>
+                     <form action="<?= base_url('tahun-akademik/act-nonaktif/' . $g->id_ta) ?>" method="post" class="form-horizontal">
+                         <input type="hidden" name="id_ta" value="<?= $g->id_ta ?>" class="form-control">
+                         <div class="box-body">
+                             <center>
+                                 <p class="mr-5">Tahun akademik ini akan diNonAktfikan!</p>
+                             </center>
+                         </div>
+                         <div class="box-footer">
+                             <button name="cmdSimpanPerguruanTinggiAsalMahasiswa" id="cmdSimpanPerguruanTinggiAsalMahasiswa" class="btn btn-flat btn-danger pull-left" value="SimpanPerguruanTinggiAsalMahasiswa"><i class="fa fa-times"></i> Non Aktifkan</button>
                              <button type="button" class="btn btn-flat btn-default pull-right" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
                          </div>
                      </form>
