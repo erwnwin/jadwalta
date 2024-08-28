@@ -54,6 +54,7 @@ $route['default_controller'] = 'Home';
 $route['jadwal-kelas'] = 'Jadwal_kelas';
 
 $route['jadwalku'] = 'Jadwalku';
+$route['notifikasi'] = 'Notifikasi';
 
 $route['jadwal-khusus'] = 'Jadwal_khusus';
 $route['jadwal-khusus/views'] = 'Jadwal_khusus/views';
